@@ -1,11 +1,12 @@
 // All UI text lives here. Edit freely, or add an English object later.
 export const strings = {
   partyTitle: 'האלווין 2026',
-  partySubtitle: 'ההזמנה שלכם מחכה. אם תעזו.',
+  partySubtitle: '',
 
   home: {
-    enter: 'לכניסה למסיבה',
-    doomsDay: 'יום הדין',
+    enter: 'הרשמה',
+    enterSub: '- תפסו מקום במנגל',
+    doomsDay: 'יום הדין - 31.10',
     soundOn: 'קול: פועל',
     soundOff: 'קול: כבוי',
   },

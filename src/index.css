@@ -7,7 +7,7 @@
   --color-ember: #ff6a00;
   --color-blood: #b8161d;
   --color-rot: #7bd63c;
-  --font-creepy: 'Creepster', 'Rubik', system-ui, sans-serif;
+  --font-creepy: 'Rubik Wet Paint', 'Rubik', system-ui, sans-serif;
   --font-body: 'Rubik', system-ui, sans-serif;
 }
 
@@ -24,6 +24,33 @@ body {
   margin: 0;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
+}
+
+/* Home screen: the invitation as full background, anchored to the top so the title stays visible */
+.home-bg {
+  background-color: #0b0a14;
+  background-image: url('/bg.webp');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
+@media (max-width: 480px) and (max-resolution: 1.5dppx) {
+  .home-bg { background-image: url('/bg-small.webp'); }
+}
+
+.btn-glow {
+  box-shadow:
+    0 0 0 2px rgba(0, 0, 0, 0.35),
+    0 0 28px rgba(255, 106, 0, 0.75),
+    0 8px 24px rgba(0, 0, 0, 0.6);
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+.btn-glow-red {
+  box-shadow:
+    0 0 0 2px rgba(0, 0, 0, 0.35),
+    0 0 28px rgba(184, 22, 29, 0.8),
+    0 8px 24px rgba(0, 0, 0, 0.6);
 }
 
 /* Flickering lantern glow behind the home screen */
