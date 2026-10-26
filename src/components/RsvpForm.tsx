@@ -53,6 +53,13 @@ export function RsvpForm({ initial, onSubmit, onBack }: Props) {
       </label>
 
       <section className="flex flex-col gap-3">
+        <h2 className="text-lg font-bold">{s.foodTitle}</h2>
+        <Stepper label={s.hamburgerMeat} value={rsvp.hamburgersMeat} onChange={(v) => set('hamburgersMeat', v)} />
+        <Stepper label={s.hamburgerVeggie} value={rsvp.hamburgersVeggie} onChange={(v) => set('hamburgersVeggie', v)} />
+        <Stepper label={s.alcohol} value={rsvp.alcoholDrinkers} onChange={(v) => set('alcoholDrinkers', v)} />
+      </section>
+
+      <section className="flex flex-col gap-3">
         <div>
           <h2 className="text-lg font-bold">{s.kidsTitle}</h2>
           <p className="text-sm text-bone/60">{s.kidsHint}</p>
@@ -60,13 +67,6 @@ export function RsvpForm({ initial, onSubmit, onBack }: Props) {
         <Stepper label={s.kids0to5} value={rsvp.kids0to5} onChange={(v) => set('kids0to5', v)} />
         <Stepper label={s.kids6to10} value={rsvp.kids6to10} onChange={(v) => set('kids6to10', v)} />
         <Stepper label={s.kids11to17} value={rsvp.kids11to17} onChange={(v) => set('kids11to17', v)} />
-      </section>
-
-      <section className="flex flex-col gap-3">
-        <h2 className="text-lg font-bold">{s.foodTitle}</h2>
-        <Stepper label={s.hamburgerMeat} value={rsvp.hamburgersMeat} onChange={(v) => set('hamburgersMeat', v)} />
-        <Stepper label={s.hamburgerVeggie} value={rsvp.hamburgersVeggie} onChange={(v) => set('hamburgersVeggie', v)} />
-        <Stepper label={s.alcohol} value={rsvp.alcoholDrinkers} onChange={(v) => set('alcoholDrinkers', v)} />
       </section>
 
       {errors.length > 0 && (
