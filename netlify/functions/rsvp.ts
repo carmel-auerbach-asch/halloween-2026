@@ -1,15 +1,5 @@
 import type { Handler } from '@netlify/functions'
 
-type Rsvp = {
-  adultName: string
-  phone?: string
-  kidsAges: number[]
-  hamburgersMeat: number
-  hamburgersVeggie: number
-  candyBags: number
-  alcoholDrinkers: number
-}
-
 const clamp = (n: unknown, max = 10) => {
   const v = Number(n)
   if (!Number.isFinite(v)) return 0
@@ -25,7 +15,7 @@ export const handler: Handler = async (event) => {
     return { statusCode: 500, body: 'SHEET_WEBHOOK_URL is not set' }
   }
 
-  let body: Partial<Rsvp>
+  let body: Record<string, unknown>
   try {
     body = JSON.parse(event.body || '{}')
   } catch {
@@ -35,19 +25,19 @@ export const handler: Handler = async (event) => {
   const adultName = String(body.adultName || '').trim().slice(0, 80)
   if (!adultName) return { statusCode: 400, body: 'adultName required' }
 
-  const kidsAges = Array.isArray(body.kidsAges)
-    ? body.kidsAges.map((a) => clamp(a, 18)).slice(0, 12)
-    : []
+  const kids0to5 = clamp(body.kids0to5)
+  const kids6to10 = clamp(body.kids6to10)
+  const kids11to17 = clamp(body.kids11to17)
 
   const payload = {
     timestamp: new Date().toISOString(),
     adult_name: adultName,
-    phone: String(body.phone || '').trim().slice(0, 30),
-    kids_ages: kidsAges.join(', '),
-    kids_count: kidsAges.length,
+    kids_0_5: kids0to5,
+    kids_6_10: kids6to10,
+    kids_11_17: kids11to17,
+    kids_total: kids0to5 + kids6to10 + kids11to17,
     hamburgers_meat: clamp(body.hamburgersMeat),
     hamburgers_veggie: clamp(body.hamburgersVeggie),
-    candy_bags: clamp(body.candyBags),
     alcohol_drinkers: clamp(body.alcoholDrinkers),
     user_agent: event.headers['user-agent'] || '',
   }

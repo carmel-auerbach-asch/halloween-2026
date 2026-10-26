@@ -7,10 +7,11 @@ export function Success({ rsvp, onHome }: Props) {
   const t = strings.summary
   const rows: [string, string][] = [
     [t.adult, rsvp.adultName],
-    [t.kids, rsvp.kidsAges.length ? rsvp.kidsAges.join(', ') : t.none],
+    [t.kids0to5, String(rsvp.kids0to5)],
+    [t.kids6to10, String(rsvp.kids6to10)],
+    [t.kids11to17, String(rsvp.kids11to17)],
     [t.meat, String(rsvp.hamburgersMeat)],
     [t.veggie, String(rsvp.hamburgersVeggie)],
-    [t.candy, String(rsvp.candyBags)],
     [t.alcohol, String(rsvp.alcoholDrinkers)],
   ]
 

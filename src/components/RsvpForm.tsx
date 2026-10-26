@@ -20,10 +20,9 @@ export function RsvpForm({ initial, onSubmit, onBack }: Props) {
   function validate(): string[] {
     const errs: string[] = []
     if (!rsvp.adultName.trim()) errs.push(s.errors.nameRequired)
-    const anyCount =
-      rsvp.hamburgersMeat + rsvp.hamburgersVeggie + rsvp.candyBags + rsvp.alcoholDrinkers > 0
-    if (!anyCount && rsvp.kidsAges.length === 0) errs.push(s.errors.nothingSelected)
-    if (rsvp.kidsAges.some((a) => Number.isNaN(a) || a < 0 || a > 18)) errs.push(s.errors.ageRange)
+    const kids = rsvp.kids0to5 + rsvp.kids6to10 + rsvp.kids11to17
+    const food = rsvp.hamburgersMeat + rsvp.hamburgersVeggie
+    if (kids + food === 0) errs.push(s.errors.nothingSelected)
     return errs
   }
 
@@ -31,7 +30,7 @@ export function RsvpForm({ initial, onSubmit, onBack }: Props) {
     e.preventDefault()
     const errs = validate()
     setErrors(errs)
-    if (errs.length === 0) onSubmit({ ...rsvp, adultName: rsvp.adultName.trim(), phone: rsvp.phone.trim() })
+    if (errs.length === 0) onSubmit({ ...rsvp, adultName: rsvp.adultName.trim() })
   }
 
   return (
@@ -53,61 +52,20 @@ export function RsvpForm({ initial, onSubmit, onBack }: Props) {
         />
       </label>
 
-      <label className="flex flex-col gap-2">
-        <span className="font-medium">{s.phone}</span>
-        <input
-          inputMode="tel"
-          value={rsvp.phone}
-          onChange={(e) => set('phone', e.target.value)}
-          className="rounded-xl border border-white/15 bg-ash px-4 py-4 text-lg outline-none focus:border-ember"
-          dir="ltr"
-        />
-      </label>
-
       <section className="flex flex-col gap-3">
         <div>
           <h2 className="text-lg font-bold">{s.kidsTitle}</h2>
           <p className="text-sm text-bone/60">{s.kidsHint}</p>
         </div>
-        {rsvp.kidsAges.map((age, i) => (
-          <div key={i} className="flex items-center gap-3 rounded-xl border border-white/10 bg-ash px-4 py-3">
-            <span className="text-sm text-bone/70">{s.kidAge}</span>
-            <input
-              type="number"
-              inputMode="numeric"
-              min={0}
-              max={18}
-              value={Number.isNaN(age) ? '' : age}
-              onChange={(e) => {
-                const next = [...rsvp.kidsAges]
-                next[i] = e.target.value === '' ? NaN : Number(e.target.value)
-                set('kidsAges', next)
-              }}
-              className="w-20 rounded-lg border border-white/15 bg-ink px-3 py-2 text-center text-lg outline-none focus:border-ember"
-            />
-            <button
-              type="button"
-              onClick={() => set('kidsAges', rsvp.kidsAges.filter((_, j) => j !== i))}
-              className="ms-auto text-sm text-blood"
-            >
-              {s.removeKid}
-            </button>
-          </div>
-        ))}
-        <button
-          type="button"
-          onClick={() => set('kidsAges', [...rsvp.kidsAges, 8])}
-          className="rounded-xl border border-dashed border-ember/50 py-3 text-ember"
-        >
-          + {s.addKid}
-        </button>
+        <Stepper label={s.kids0to5} value={rsvp.kids0to5} onChange={(v) => set('kids0to5', v)} />
+        <Stepper label={s.kids6to10} value={rsvp.kids6to10} onChange={(v) => set('kids6to10', v)} />
+        <Stepper label={s.kids11to17} value={rsvp.kids11to17} onChange={(v) => set('kids11to17', v)} />
       </section>
 
       <section className="flex flex-col gap-3">
         <h2 className="text-lg font-bold">{s.foodTitle}</h2>
         <Stepper label={s.hamburgerMeat} value={rsvp.hamburgersMeat} onChange={(v) => set('hamburgersMeat', v)} />
         <Stepper label={s.hamburgerVeggie} value={rsvp.hamburgersVeggie} onChange={(v) => set('hamburgersVeggie', v)} />
-        <Stepper label={s.candyBags} value={rsvp.candyBags} onChange={(v) => set('candyBags', v)} />
         <Stepper label={s.alcohol} value={rsvp.alcoholDrinkers} onChange={(v) => set('alcoholDrinkers', v)} />
       </section>
 

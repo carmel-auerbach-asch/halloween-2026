@@ -1,20 +1,20 @@
 export type Rsvp = {
   adultName: string
-  phone: string
-  kidsAges: number[]
+  kids0to5: number
+  kids6to10: number
+  kids11to17: number
   hamburgersMeat: number
   hamburgersVeggie: number
-  candyBags: number
   alcoholDrinkers: number
 }
 
 export const emptyRsvp: Rsvp = {
   adultName: '',
-  phone: '',
-  kidsAges: [],
+  kids0to5: 0,
+  kids6to10: 0,
+  kids11to17: 0,
   hamburgersMeat: 0,
   hamburgersVeggie: 0,
-  candyBags: 0,
   alcoholDrinkers: 0,
 }
 
