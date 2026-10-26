@@ -22,7 +22,7 @@ export default function App() {
   const [screen, setScreen] = useState<Screen>('home')
   const [rsvp, setRsvp] = useState<Rsvp>(emptyRsvp)
   const [unlocked, setUnlocked] = useState(readUnlocked)
-  const [soundOn, setSoundOn] = useState(false)
+  const soundOn = true
   const [sending, setSending] = useState(false)
 
   function markUnlocked() {
@@ -52,8 +52,6 @@ export default function App() {
       return (
         <Home
           unlocked={unlocked}
-          soundOn={soundOn}
-          onToggleSound={() => setSoundOn((v) => !v)}
           onEnter={() => setScreen('form')}
           onUnlocked={markUnlocked}
           onDoomsDay={() => setScreen('doomsday')}

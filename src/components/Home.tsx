@@ -4,26 +4,16 @@ import { UnlockModal } from './UnlockModal'
 
 type Props = {
   unlocked: boolean
-  soundOn: boolean
-  onToggleSound: () => void
   onEnter: () => void
   onUnlocked: () => void
   onDoomsDay: () => void
 }
 
-export function Home({ unlocked, soundOn, onToggleSound, onEnter, onUnlocked, onDoomsDay }: Props) {
+export function Home({ unlocked, onEnter, onUnlocked, onDoomsDay }: Props) {
   const [showUnlock, setShowUnlock] = useState(false)
 
   return (
     <div className="home-bg relative flex min-h-dvh flex-col px-5 py-6">
-      <button
-        type="button"
-        onClick={onToggleSound}
-        className="relative z-10 self-start rounded-full border border-white/25 bg-black/40 px-3 py-1 text-xs text-bone/80 backdrop-blur"
-      >
-        {soundOn ? strings.home.soundOn : strings.home.soundOff}
-      </button>
-
       <div className="relative z-10 flex flex-[1] flex-col items-center justify-center text-center">
         <h1 className="title-creepy text-6xl text-ember">{strings.partyTitle}</h1>
         {strings.partySubtitle && (

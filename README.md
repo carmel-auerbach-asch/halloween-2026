@@ -1,6 +1,6 @@
 # האלווין 2026 - RSVP App
 
-Mobile-first RSVP page. Guests fill the form, a zombie asks if they are sure, and the answer lands in a Google Sheet used for ordering food. A locked "Dooms Day" button on the home screen opens with a secret code announced at the party.
+Mobile-first RSVP page. Guests fill the form, a pirate skeleton asks if they are sure, and the answer lands in a Google Sheet used for ordering food. A locked "Dooms Day" button on the home screen opens with a secret code announced at the party.
 
 ## Stack
 
@@ -53,8 +53,7 @@ timestamp, adult_name, phone, kids_ages, kids_count, hamburgers_meat, hamburgers
 - Party title: `strings.partyTitle` and `<title>` in `index.html`
 - Dooms Day code: the `DOOMSDAY_CODE` env var in Netlify
 - Dooms Day screen content: `src/components/DoomsDay.tsx`
-- Zombie image: replace `public/zombie.svg` with your own png/jpg/gif and update `ZOMBIE_SRC` in `src/components/Scare.tsx`
-- Growl sound: drop `public/growl.mp3`. Plays only if the guest turned sound on from the home screen (browsers block autoplay).
+- Scare clip: replace `public/skeleton.mp4` (and `public/skeleton-poster.jpg`, the frozen last frame). Keep it short (about 5 s) and under 1 MB. It plays with sound (allowed because it starts right after the guest taps submit); if a browser blocks that, it plays muted.
 - Colors and fonts: `src/index.css` under `@theme`
 
 ## Behavior notes
@@ -62,4 +61,4 @@ timestamp, adult_name, phone, kids_ages, kids_count, hamburgers_meat, hamburgers
 - Submit button is disabled while sending, so no double rows.
 - If the function fails, guests see an error screen and their answers are kept.
 - Dooms Day unlock is remembered in the phone's localStorage.
-- `prefers-reduced-motion` skips the zombie run and shows the question immediately.
+- `prefers-reduced-motion` shows the poster image instead of the video and the question immediately.
