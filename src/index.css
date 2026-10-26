@@ -1,0 +1,125 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-ink: #050505;
+  --color-ash: #141414;
+  --color-bone: #e8e2d0;
+  --color-ember: #ff6a00;
+  --color-blood: #b8161d;
+  --color-rot: #7bd63c;
+  --font-creepy: 'Creepster', 'Rubik', system-ui, sans-serif;
+  --font-body: 'Rubik', system-ui, sans-serif;
+}
+
+html,
+body,
+#root {
+  min-height: 100%;
+  background: var(--color-ink);
+  color: var(--color-bone);
+  font-family: var(--font-body);
+}
+
+body {
+  margin: 0;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* Flickering lantern glow behind the home screen */
+.lantern-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(60% 45% at 50% 30%, rgba(255, 106, 0, 0.28), transparent 70%),
+    radial-gradient(40% 30% at 20% 80%, rgba(123, 214, 60, 0.12), transparent 70%);
+  animation: flicker 3.4s infinite;
+}
+
+@keyframes flicker {
+  0%, 100% { opacity: 1; }
+  7% { opacity: 0.82; }
+  10% { opacity: 1; }
+  28% { opacity: 0.9; }
+  31% { opacity: 1; }
+  52% { opacity: 0.86; }
+  55% { opacity: 1; }
+  78% { opacity: 0.93; }
+}
+
+.title-creepy {
+  font-family: var(--font-creepy);
+  letter-spacing: 0.04em;
+  text-shadow:
+    0 0 12px rgba(255, 106, 0, 0.7),
+    0 0 40px rgba(255, 106, 0, 0.35);
+}
+
+/* Lock shake on wrong code */
+.shake {
+  animation: shake 0.45s;
+}
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+/* Lock breaking open */
+.lock-break {
+  animation: lockbreak 0.9s forwards;
+}
+@keyframes lockbreak {
+  0% { transform: rotate(0) scale(1); filter: drop-shadow(0 0 0 var(--color-rot)); }
+  30% { transform: rotate(-12deg) scale(1.15); }
+  60% { transform: rotate(18deg) scale(1.25); filter: drop-shadow(0 0 18px var(--color-rot)); }
+  100% { transform: rotate(0) scale(0.2); opacity: 0; }
+}
+
+/* Zombie run-up: starts small and far, grows fast while jittering */
+.zombie-run {
+  animation: zombierun 1.7s cubic-bezier(0.6, 0, 0.9, 0.2) forwards;
+}
+@keyframes zombierun {
+  0% { transform: translate(-50%, -50%) scale(0.08); opacity: 0; filter: blur(2px); }
+  10% { opacity: 1; }
+  25% { transform: translate(-54%, -46%) scale(0.18); }
+  45% { transform: translate(-46%, -52%) scale(0.35); }
+  65% { transform: translate(-52%, -49%) scale(0.6); }
+  85% { transform: translate(-49%, -51%) scale(1.05); filter: blur(0); }
+  100% { transform: translate(-50%, -50%) scale(1.3); }
+}
+
+/* Slow zoom into the face while the question appears */
+.zombie-zoom {
+  animation: zombiezoom 4s ease-out forwards;
+}
+@keyframes zombiezoom {
+  0% { transform: translate(-50%, -50%) scale(1.3); }
+  100% { transform: translate(-50%, -42%) scale(2.1); }
+}
+
+.fade-in-late {
+  opacity: 0;
+  animation: fadein 0.8s ease-out 1.2s forwards;
+}
+@keyframes fadein {
+  to { opacity: 1; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .lantern-glow,
+  .zombie-run,
+  .zombie-zoom,
+  .shake,
+  .lock-break,
+  .fade-in-late {
+    animation: none !important;
+    opacity: 1;
+  }
+  .zombie-run,
+  .zombie-zoom {
+    transform: translate(-50%, -50%) scale(1.3);
+  }
+}
