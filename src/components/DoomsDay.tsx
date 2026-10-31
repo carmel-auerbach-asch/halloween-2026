@@ -26,12 +26,12 @@ export function DoomsDay({ onBack }: Props) {
   const urgent = left <= 60_000
 
   return (
-    <div className="relative flex min-h-dvh flex-col items-center justify-center px-5 py-8 text-center">
+    <div className="relative flex min-h-dvh flex-col items-center justify-center px-5 py-6 text-center">
       <div className="lantern-glow" />
       <h1 className="title-creepy relative z-10 text-5xl text-blood">{strings.doomsDay.title}</h1>
 
       <h2 className="relative z-10 mt-6 text-2xl font-bold leading-snug text-ember">{strings.doomsDay.question}</h2>
-      <p className="relative z-10 mt-4 max-w-xs whitespace-pre-line text-base leading-relaxed text-bone/85">
+      <p className="relative z-10 mt-4 max-w-sm whitespace-pre-line text-sm leading-relaxed text-bone/85">
         {strings.doomsDay.story}
       </p>
 
