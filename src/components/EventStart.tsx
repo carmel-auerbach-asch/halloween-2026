@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { strings } from '../strings'
-import { hunt } from '../clues'
 import { HuntProgress } from './HuntProgress'
 
 // Drop your recorded instructions at /public/instructions.mp3 (or .m4a and change the name here).
@@ -22,7 +21,7 @@ export function EventStart() {
       <div className="lantern-glow" />
 
       <h1 className="title-creepy relative z-10 mt-6 text-7xl text-blood">{strings.doomsDay.startTitle}</h1>
-      <p className="relative z-10 mt-6 max-w-sm whitespace-pre-line text-lg leading-relaxed text-bone/90">
+      <p className="relative z-10 mt-6 max-w-sm whitespace-pre-line text-base leading-relaxed text-bone/90">
         {strings.doomsDay.startBody}
       </p>
 
@@ -30,8 +29,6 @@ export function EventStart() {
         <p className="mb-3 text-sm text-ember">{strings.doomsDay.audioLabel}</p>
         <audio controls preload="auto" src={AUDIO_SRC} className="w-full" />
       </div>
-
-      <p className="relative z-10 mt-8 max-w-sm text-base leading-relaxed text-bone/80">{hunt.intro}</p>
 
       <div className="relative z-10 mt-8 w-full max-w-sm">
         <HuntProgress />

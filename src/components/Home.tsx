@@ -33,13 +33,13 @@ export function Home({ unlocked, onEnter, onUnlocked, onDoomsDay }: Props) {
 
         <button
           type="button"
-          onClick={() => (unlocked ? onDoomsDay() : setShowUnlock(true))}
+          onClick={onDoomsDay}
           className={
             'btn-glow-red flex items-center justify-center gap-3 rounded-2xl py-5 text-ink active:scale-[0.98] ' +
-            (unlocked ? 'bg-rot' : 'bg-blood')
+            'bg-blood'
           }
         >
-          <LockIcon open={unlocked} />
+          <LockIcon open={true} />
           <span className="font-creepy text-3xl">{strings.home.doomsDay}</span>
         </button>
       </div>
