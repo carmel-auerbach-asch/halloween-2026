@@ -63,8 +63,14 @@ export const strings = {
 
   doomsDay: {
     title: 'יום הדין',
-    body: 'בקרוב...',
+    question: 'מי יהיה הקורבן של קפטן רוברטס השנה?',
+    story: 'בשעה 20:00 הקפטן יגיע לאסוף את הנשמה המסכנה.\n\n18:15 תוכלו להתחיל לחפש רמזים כדי להציל את עצמכם.',
+    countdownLabel: 'החיפוש מתחיל בעוד',
     back: 'חזרה',
+    // Opening page, shown automatically at the target time
+    startTitle: 'מתחילים',
+    startBody: 'הנקודה השחורה ניתנה הערב לאחד מכם.\nהאזינו להוראות.',
+    audioLabel: 'הוראות (לחצו להשמעה)',
   },
 
   summary: {

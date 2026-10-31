@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Home } from './components/Home'
 import { RsvpForm } from './components/RsvpForm'
 import { Scare } from './components/Scare'
 import { Success } from './components/Success'
 import { ErrorScreen } from './components/ErrorScreen'
 import { DoomsDay } from './components/DoomsDay'
+import { Clue } from './components/Clue'
+import { clueIdFromHash } from './hunt'
 import { submitRsvp } from './api'
 import { emptyRsvp, type Rsvp, type Screen } from './types'
 
@@ -24,6 +26,20 @@ export default function App() {
   const [unlocked, setUnlocked] = useState(readUnlocked)
   const soundOn = true
   const [sending, setSending] = useState(false)
+  const [clueId, setClueId] = useState<number | null>(() => clueIdFromHash())
+
+  // QR codes open #/clue/<id>. Follow hash changes so scanning while the app is open works too.
+  useEffect(() => {
+    const onHash = () => setClueId(clueIdFromHash())
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [])
+
+  function leaveClue() {
+    history.replaceState(null, '', window.location.pathname)
+    setClueId(null)
+    setScreen('doomsday')
+  }
 
   function markUnlocked() {
     setUnlocked(true)
@@ -46,6 +62,8 @@ export default function App() {
       setSending(false)
     }
   }
+
+  if (clueId !== null) return <Clue id={clueId} onBack={leaveClue} />
 
   switch (screen) {
     case 'home':
